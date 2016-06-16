@@ -26,6 +26,7 @@ function replaceAll(str, find, replace) {
   return str.replace(new RegExp(escapeRegExp(find), 'g'), replace);
 }
 function encryptdata() {
+try {
 var hashedpassword = sha3_512($("#password").val())
 var decodeddata = $("#data").val()
 decodeddata = replaceAll(decodeddata, "-", "=")
@@ -33,10 +34,14 @@ decodeddata = replaceAll(decodeddata, "_", "+")
 var decodeddata = Base64.decode(decodeddata)
 var decrypteddata = sjcl.decrypt(hashedpassword, decodeddata)
 var final = Base64.decode(decrypteddata)
-$("#show").html("Your dencrypted note is: <br> <textarea rows='4' cols='60'>" + final + "</textarea>")
+$("#center").html("<h4>Your dencrypted note is: <br> <textarea rows='4' cols='60'>" + final + "</textarea></h4>")
+}
+catch(err) {
+alert(err.message)
+}
+
 }
 </script>
-<center><h1>CryptoNotes Decoder (beta)</h1></center>
 <div id="center">
 <center>
 <span id="databox" hidden>
