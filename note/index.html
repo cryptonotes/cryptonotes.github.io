@@ -44,7 +44,7 @@ var decodeddata = Base64.decode(decodeddata)
 var decrypteddata = sjcl.decrypt(hashedpassword, decodeddata)
 var unencodedfinal = Base64.decode(decrypteddata)
 var final = htmlEncode(unencodedfinal)
-$("#center").html("<h4>Your dencrypted note is: <br> <textarea rows='4' cols='60' style='margin-left: 1px; margin-top: 1px'>" + final + "</textarea></h4>")
+$("#center").html("<h4>Your note is: <br> <textarea rows='4' cols='60' style='margin-left: 1px; margin-top: 1px'>" + final + "</textarea></h4>")
 
 }
 catch(err) {
