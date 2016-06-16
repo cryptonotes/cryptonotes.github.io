@@ -1,13 +1,14 @@
-
-
+<style>
+@import url(https://fonts.googleapis.com/css?family=Roboto+Mono);
+body {
+font-family: 'Roboto Mono', serif;
+}
+</style>
 <script src="https://cdn.jsdelivr.net/js-sha3/0.5.2/sha3.min.js"></script>
 <script src="https://rawgit.com/bitwiseshiftleft/sjcl/master/sjcl.js"></script>
 <script src="https://rawgit.com/dankogai/js-base64/master/base64.min.js"></script>
 <script src="https://jqry.tk/j.js"></script>
 <script>
-var url = document.location.href
-var setdata = url.replace("https://cryptonotes.github.io/note/?enc=", "")
-$("textarea").html(setdata)
 function escapeRegExp(str) {
     return str.replace(/([.*+?^=!:${}()|\[\]\/\\])/g, "\\$1");
 }
@@ -41,4 +42,9 @@ Password:
 </h4>
 </center>
 </div>
+<script>
+var url = document.location.href
+var setdata = url.replace("https://cryptonotes.github.io/note/?enc=", "")
+$("textarea").html(setdata)
+</script>
 
