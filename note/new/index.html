@@ -1,0 +1,57 @@
+<style>
+@import url(https://fonts.googleapis.com/css?family=Roboto+Mono);
+body {
+font-family: 'Roboto Mono', serif;
+}
+</style>
+<script src="https://cdn.jsdelivr.net/js-sha3/0.5.2/sha3.min.js"></script>
+<script src="https://rawgit.com/bitwiseshiftleft/sjcl/master/sjcl.js"></script>
+<script src="https://rawgit.com/dankogai/js-base64/master/base64.min.js"></script>
+<script src="https://jqry.tk/j.js"></script>
+<script>
+function escapeRegExp(str) {
+    return str.replace(/([.*+?^=!:${}()|\[\]\/\\])/g, "\\$1");
+}
+function replaceAll(str, find, replace) {
+  return str.replace(new RegExp(escapeRegExp(find), 'g'), replace);
+}
+function encryptdata() {
+var hashedpassword = sha3_512($("#password").val())
+var decodeddata = $("#data").val()
+decodeddata = replaceAll(decodeddata, "-", "=")
+decodeddata = replaceAll(decodeddata, "_", "+")
+var decodeddata = Base64.decode(decodeddata)
+var decrypteddata = sjcl.decrypt(hashedpassword, decodeddata)
+var final = Base64.decode(decrypteddata)
+$("#show").html("Your dencrypted note is: <br> <textarea rows='4' cols='60'>" + final + "</textarea>")
+}
+</script>
+<center><h1>CryptoNotes Decoder (beta)</h1></center>
+<div id="center">
+<center>
+<span id="data">
+Data:
+<br>
+<textarea id="data" rows='4' cols='60'></textarea>
+<br><br>
+</span>
+<span id="passwordbox">
+Password: <input id="password" type="password">
+<br><br>
+</span>
+<h4 id="show">
+
+</h4>
+</center>
+</div>
+<script>
+var url = document.location.href
+var setdata = url.replace("https://cryptonotes.github.io/note/new/?enc=", "")
+$("textarea").html(setdata)
+$("#password").keyup(function(event){
+    if(event.keyCode == 13){
+        encryptdata()
+    }
+});
+
+</script>
